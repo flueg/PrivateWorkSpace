@@ -75,7 +75,7 @@ void CSudoku::setSudokuGrid(int i, int j, int val)
 int CSudoku::getSudokuInput()
 {
     const std::string filePath = CSudoku::getSudokuInputFile();
-    char fMode[3] = {'r', '\0'};
+    char fMode[3] = {'r', '+', '\0'};
     FILE* fd = fopen(filePath.c_str(), fMode);
     if (fd == NULL)
     {
@@ -190,15 +190,18 @@ int CSudoku::getNextGridIndex(int currentIndex)
     for (int i = currentSequenceIndex; i < 81; i++)
     {
         possibleSolutions = 0;
-        // Avoid dead recusion, processSequences[i] != index.
-        if (sudokuSolution[processSequences[i]] > 0) ++possibleSolutions;
-        int possibleSolutionBit = CSudoku::getPossibleSolutionBits(i);
+        int possibleSolutionBit = CSudoku::getPossibleSolutionBits(processSequences[i]);
         while (possibleSolutionBit)
         {
             ++possibleSolutions;
             // We don't care what the lowest bit is.
             CSudoku::unsetLowstBit(possibleSolutionBit);
         }
+        
+        // Avoid dead recusion, processSequences[i] != index.
+        if (!possibleSolutions)
+            continue;
+        if (sudokuSolution[processSequences[i]] > 0) ++possibleSolutions;
         
         if (possibleSolutions < MINI_SOLUTION)
         {
