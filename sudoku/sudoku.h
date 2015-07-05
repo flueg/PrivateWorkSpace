@@ -37,27 +37,27 @@ private:
     // Where we store a temple sudoku resolution.
     int sudokuSolution[81];
     
-    static int currentSequenceIndex, visitCount;
-public:
+    public:
+    
+    int currentSequenceIndex, visitCount;
+
     CSudoku(std::string iFile = "sudoku.input", std::string oFile = "sudoku.output"):
-    inputFile(iFile), outputFile(oFile)
+    inputFile(iFile), outputFile(oFile), currentSequenceIndex(0), visitCount(0)
     {
+        initSudoku();
+    
         for (int i = 0; i < 9; i++)
-        {
-            row[i] = ONES;
-            col[i] = ONES;
-            block[i] = ONES;
-        }
+            row[i] = col[i] = block[i] = ONES;
         
         // Assume that we will process the sudoku grids from 0 to 80
         for (int i = 0; i < 81; i++)
+        {
+            // Init the sudoku solution as BLANK as we have not worked it out.
             processSequences[i] = i;
-        
-        // Init the sudoku solution as BLANK as we have not worked it out.
-        memset(sudokuSolution, BLANK, sizeof(int) * 81);
-        memset(stackLevelCount, BLANK, sizeof(int) * 81);
+            sudokuSolution[i] = BLANK;
+            stackLevelCount[i] = 0;
+        }
 
-        initSudoku();
         getSudokuInput();
     };
     
@@ -119,7 +119,7 @@ public:
      */
     int unsetLowstBit(int& bit)
     {
-        int lowestBit = bit & -bit;
+        int lowestBit = bit & (-bit);
         bit &= ~lowestBit;
         return lowestBit;
     }

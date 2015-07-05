@@ -11,9 +11,6 @@
 #include <exception>
 #include <iostream>
 
-// We will process sudoku grids from 0 to 81;
-int CSudoku::currentSequenceIndex = 0;
-int CSudoku::visitCount = 0;
 
 void CSudoku::setBit(int index, int bitVal)
 {
@@ -49,9 +46,9 @@ void CSudoku::initSudoku()
 
 void CSudoku::settleFixedGrid(int cIndex, int nIndex)
 {
-    int tIndex = processSequences[cIndex];
-    processSequences[cIndex] = processSequences[nIndex];
-    processSequences[nIndex] = tIndex;
+    int temp = processSequences[nIndex];
+    processSequences[nIndex] = processSequences[cIndex];
+    processSequences[cIndex] = temp;
 }
 
 void CSudoku::setSudokuGrid(int i, int j, int val)
@@ -61,10 +58,13 @@ void CSudoku::setSudokuGrid(int i, int j, int val)
     sudokuSolution[index] = valBit;
     //std::cout << "set val: " << valBit << std::endl;
     removeBit(index, valBit);
-    CSudoku::settleFixedGrid(currentSequenceIndex, index);
+    int nextSequce = currentSequenceIndex;
+    while (nextSequce < 81 && processSequences[nextSequce] != index)
+        nextSequce++;
+    this->settleFixedGrid(this->currentSequenceIndex, nextSequce);
 
     // Let's move teh index forward to a unsettled grid.
-    ++currentSequenceIndex;
+    this->currentSequenceIndex++;
 }
 
 /**
@@ -74,7 +74,7 @@ void CSudoku::setSudokuGrid(int i, int j, int val)
  */
 int CSudoku::getSudokuInput()
 {
-    const std::string filePath = CSudoku::getSudokuInputFile();
+    const std::string filePath = this->getSudokuInputFile();
     char fMode[3] = {'r', '+', '\0'};
     FILE* fd = fopen(filePath.c_str(), fMode);
     if (fd == NULL)
@@ -82,7 +82,7 @@ int CSudoku::getSudokuInput()
         std::cout << "errno: " << errno << std::endl;
         throw std::exception();
     }
-    char line[20];
+    char line[80];
     int i = 0;
     while (fgets(line, sizeof(line), fd) != NULL)
     {
@@ -92,7 +92,7 @@ int CSudoku::getSudokuInput()
             char ch = line[j];
             if (ch >= '1' && ch <= '9')
             {
-                CSudoku::setSudokuGrid(i, j, ch - '0');
+                this->setSudokuGrid(i, j, ch - '0');
             }
         }
         ++i;
@@ -100,9 +100,9 @@ int CSudoku::getSudokuInput()
         if (i > 8) break;
     }
     fclose(fd);
-    const std::string oFile = CSudoku::getSudokuOutputFile();
+    const std::string oFile = this->getSudokuOutputFile();
     fprintf(stdout, "Load data from %s:\n", filePath.c_str());
-    CSudoku::printSolution(stdout);
+    this->printSolution(stdout);
 
     return 1;
 }
@@ -136,7 +136,7 @@ void CSudoku::printSolution(FILE* fd)
 // Func to dump sudoku resolution into local file.
 int CSudoku::saveSudokuResolotion(int solutionCount)
 {
-    const std::string oFile = CSudoku::getSudokuOutputFile();
+    const std::string oFile = this->getSudokuOutputFile();
     char fMode[] = {'a', '+', '\0'};
     
     FILE* fd = fopen(oFile.c_str(), fMode);
@@ -148,8 +148,8 @@ int CSudoku::saveSudokuResolotion(int solutionCount)
 
 void CSudoku::processSudoku(int currentIndex)
 {
-    if (currentIndex == 0)
-        currentIndex = currentSequenceIndex;
+//    if (currentIndex == 0)
+//        currentIndex = currentSequenceIndex;
     ++visitCount;
     ++stackLevelCount[currentIndex];
     
@@ -158,51 +158,52 @@ void CSudoku::processSudoku(int currentIndex)
         saveSudokuResolotion(stackLevelCount[80]);
         return;
     }
+
+    int nextSequenceIndex = getNextGridIndex(currentIndex);
+    this->settleFixedGrid(currentIndex, nextSequenceIndex);
     
     int index = processSequences[currentIndex];
-    int nextSequenceIndex = getNextGridIndex(currentIndex);
-    CSudoku::settleFixedGrid(currentIndex, nextSequenceIndex);
     
-    int possibleSolutionBit = CSudoku::getPossibleSolutionBits(index);
+    int possibleSolutionBit = this->getPossibleSolutionBits(index);
     while (possibleSolutionBit)
     {
-        int valBit = CSudoku::unsetLowstBit(possibleSolutionBit);
-        CSudoku::removeBit(index, valBit);
+        int valBit = this->unsetLowstBit(possibleSolutionBit);
+        this->removeBit(index, valBit);
         sudokuSolution[index] = valBit;
+   
+        this->processSudoku(currentIndex + 1);
         
-        CSudoku::processSudoku(currentIndex + 1);
-        
-        CSudoku::setBit(index, valBit);
+        this->setBit(index, valBit);
         sudokuSolution[index] = BLANK;
     }
     
-    CSudoku::settleFixedGrid(currentIndex, nextSequenceIndex);
-    return;
+    this->settleFixedGrid(currentIndex, nextSequenceIndex);
 }
 
 int CSudoku::getNextGridIndex(int currentIndex)
 {
     int nextIndex, possibleSolutions;
     // As we know, we can have 9 possible solutions for a blank grid.
-    int MINI_SOLUTION = 10;
+    int MINI_SOLUTION = 100;
 
     // Accelerate the speech.
-    for (int i = currentSequenceIndex; i < 81; i++)
+    //for (int i = currentSequenceIndex; i < 81; i++)
+    for (int i = currentIndex; i < 81; i++)
     {
         possibleSolutions = 0;
-        int possibleSolutionBit = CSudoku::getPossibleSolutionBits(processSequences[i]);
+        int possibleSolutionBit = this->getPossibleSolutionBits(processSequences[i]);
         while (possibleSolutionBit)
         {
             ++possibleSolutions;
             // We don't care what the lowest bit is.
-            CSudoku::unsetLowstBit(possibleSolutionBit);
+            this->unsetLowstBit(possibleSolutionBit);
         }
         
         // Avoid dead recusion, processSequences[i] != index.
-        if (!possibleSolutions)
+        /*if (!possibleSolutions)
             continue;
         if (sudokuSolution[processSequences[i]] > 0) ++possibleSolutions;
-        
+        */
         if (possibleSolutions < MINI_SOLUTION)
         {
             MINI_SOLUTION = possibleSolutions;
