@@ -1,0 +1,184 @@
+Solution #2:
+1 5 8 6 3 7 2 4 
+Solution #4:
+1 6 8 3 7 4 2 5 
+Solution #6:
+1 7 4 6 8 2 5 3 
+Solution #8:
+1 7 5 8 2 4 6 3 
+Solution #10:
+2 4 6 8 3 1 7 5 
+Solution #12:
+2 5 7 1 3 8 6 4 
+Solution #14:
+2 5 7 4 1 8 6 3 
+Solution #16:
+2 6 1 7 4 8 3 5 
+Solution #18:
+2 6 8 3 1 4 7 5 
+Solution #20:
+2 7 3 6 8 5 1 4 
+Solution #22:
+2 7 5 8 1 4 6 3 
+Solution #24:
+2 8 6 1 3 5 7 4 
+Solution #26:
+3 1 7 5 8 2 4 6 
+Solution #28:
+3 5 2 8 1 7 4 6 
+Solution #30:
+3 5 2 8 6 4 7 1 
+Solution #32:
+3 5 7 1 4 2 8 6 
+Solution #34:
+3 5 8 4 1 7 2 6 
+Solution #36:
+3 6 2 5 8 1 7 4 
+Solution #38:
+3 6 2 7 1 4 8 5 
+Solution #40:
+3 6 2 7 5 1 8 4 
+Solution #42:
+3 6 4 1 8 5 7 2 
+Solution #44:
+3 6 4 2 8 5 7 1 
+Solution #46:
+3 6 8 1 4 7 5 2 
+Solution #48:
+3 6 8 1 5 7 2 4 
+Solution #50:
+3 6 8 2 4 1 7 5 
+Solution #52:
+3 7 2 8 5 1 4 6 
+Solution #54:
+3 7 2 8 6 4 1 5 
+Solution #56:
+3 8 4 7 1 6 2 5 
+Solution #58:
+4 1 5 8 2 7 3 6 
+Solution #60:
+4 1 5 8 6 3 7 2 
+Solution #62:
+4 2 5 8 6 1 3 7 
+Solution #64:
+4 2 7 3 6 8 1 5 
+Solution #66:
+4 2 7 3 6 8 5 1 
+Solution #68:
+4 2 7 5 1 8 6 3 
+Solution #70:
+4 2 8 5 7 1 3 6 
+Solution #72:
+4 2 8 6 1 3 5 7 
+Solution #74:
+4 6 1 5 2 8 3 7 
+Solution #76:
+4 6 8 2 7 1 3 5 
+Solution #78:
+4 6 8 3 1 7 5 2 
+Solution #80:
+4 7 1 8 5 2 6 3 
+Solution #82:
+4 7 3 8 2 5 1 6 
+Solution #84:
+4 7 5 2 6 1 3 8 
+Solution #86:
+4 7 5 3 1 6 8 2 
+Solution #88:
+4 8 1 3 6 2 7 5 
+Solution #90:
+4 8 1 5 7 2 6 3 
+Solution #92:
+4 8 5 3 1 7 2 6 
+Solution #94:
+5 1 4 6 8 2 7 3 
+Solution #96:
+5 1 8 4 2 7 3 6 
+Solution #98:
+5 1 8 6 3 7 2 4 
+Solution #100:
+5 2 4 6 8 3 1 7 
+Solution #102:
+5 2 4 7 3 8 6 1 
+Solution #104:
+5 2 6 1 7 4 8 3 
+Solution #106:
+5 2 8 1 4 7 3 6 
+Solution #108:
+5 3 1 6 8 2 4 7 
+Solution #110:
+5 3 1 7 2 8 6 4 
+Solution #112:
+5 3 8 4 7 1 6 2 
+Solution #114:
+5 7 1 3 8 6 4 2 
+Solution #116:
+5 7 1 4 2 8 6 3 
+Solution #118:
+5 7 2 4 8 1 3 6 
+Solution #120:
+5 7 2 6 3 1 4 8 
+Solution #122:
+5 7 2 6 3 1 8 4 
+Solution #124:
+5 7 4 1 3 8 6 2 
+Solution #126:
+5 8 4 1 3 6 2 7 
+Solution #128:
+5 8 4 1 7 2 6 3 
+Solution #130:
+6 1 5 2 8 3 7 4 
+Solution #132:
+6 2 7 1 3 5 8 4 
+Solution #134:
+6 2 7 1 4 8 5 3 
+Solution #136:
+6 3 1 7 5 8 2 4 
+Solution #138:
+6 3 1 8 4 2 7 5 
+Solution #140:
+6 3 1 8 5 2 4 7 
+Solution #142:
+6 3 5 7 1 4 2 8 
+Solution #144:
+6 3 5 8 1 4 2 7 
+Solution #146:
+6 3 7 2 4 8 1 5 
+Solution #148:
+6 3 7 2 8 5 1 4 
+Solution #150:
+6 3 7 4 1 8 2 5 
+Solution #152:
+6 4 1 5 8 2 7 3 
+Solution #154:
+6 4 2 8 5 7 1 3 
+Solution #156:
+6 4 7 1 3 5 2 8 
+Solution #158:
+6 4 7 1 8 2 5 3 
+Solution #160:
+6 8 2 4 1 7 5 3 
+Solution #162:
+7 1 3 8 6 4 2 5 
+Solution #164:
+7 2 4 1 8 5 3 6 
+Solution #166:
+7 2 6 3 1 4 8 5 
+Solution #168:
+7 3 1 6 8 5 2 4 
+Solution #170:
+7 3 8 2 5 1 6 4 
+Solution #172:
+7 4 2 5 8 1 3 6 
+Solution #174:
+7 4 2 8 6 1 3 5 
+Solution #176:
+7 5 3 1 6 8 2 4 
+Solution #178:
+8 2 4 1 7 5 3 6 
+Solution #180:
+8 2 5 3 1 7 4 6 
+Solution #182:
+8 3 1 6 2 5 7 4 
+Solution #184:
+8 4 1 3 6 2 7 5 
