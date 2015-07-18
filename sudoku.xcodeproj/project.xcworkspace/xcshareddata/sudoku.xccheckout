@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>IDESourceControlProjectFavoriteDictionaryKey</key>
+	<false/>
+	<key>IDESourceControlProjectIdentifier</key>
+	<string>87ACE858-33A1-4D80-B270-3A6C1B7A8C68</string>
+	<key>IDESourceControlProjectName</key>
+	<string>sudoku</string>
+	<key>IDESourceControlProjectOriginsDictionary</key>
+	<dict>
+		<key>1BFD2CFE079A5A145BBA03DC1A4245A1C38E100C</key>
+		<string>https://github.com/flueg/PrivateWorkSpace.git</string>
+	</dict>
+	<key>IDESourceControlProjectPath</key>
+	<string>sudoku.xcodeproj</string>
+	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
+	<dict>
+		<key>1BFD2CFE079A5A145BBA03DC1A4245A1C38E100C</key>
+		<string>../..</string>
+	</dict>
+	<key>IDESourceControlProjectURL</key>
+	<string>https://github.com/flueg/PrivateWorkSpace.git</string>
+	<key>IDESourceControlProjectVersion</key>
+	<integer>111</integer>
+	<key>IDESourceControlProjectWCCIdentifier</key>
+	<string>1BFD2CFE079A5A145BBA03DC1A4245A1C38E100C</string>
+	<key>IDESourceControlProjectWCConfigurations</key>
+	<array>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.git</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>1BFD2CFE079A5A145BBA03DC1A4245A1C38E100C</string>
+			<key>IDESourceControlWCCName</key>
+			<string>PrivateWorkSpace</string>
+		</dict>
+	</array>
+</dict>
+</plist>

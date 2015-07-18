@@ -1,184 +1,184 @@
-Solution #2:
+Solution #1:
 1 5 8 6 3 7 2 4 
-Solution #4:
+Solution #2:
 1 6 8 3 7 4 2 5 
-Solution #6:
+Solution #3:
 1 7 4 6 8 2 5 3 
-Solution #8:
+Solution #4:
 1 7 5 8 2 4 6 3 
-Solution #10:
+Solution #5:
 2 4 6 8 3 1 7 5 
-Solution #12:
+Solution #6:
 2 5 7 1 3 8 6 4 
-Solution #14:
+Solution #7:
 2 5 7 4 1 8 6 3 
-Solution #16:
+Solution #8:
 2 6 1 7 4 8 3 5 
-Solution #18:
+Solution #9:
 2 6 8 3 1 4 7 5 
-Solution #20:
+Solution #10:
 2 7 3 6 8 5 1 4 
-Solution #22:
+Solution #11:
 2 7 5 8 1 4 6 3 
-Solution #24:
+Solution #12:
 2 8 6 1 3 5 7 4 
-Solution #26:
+Solution #13:
 3 1 7 5 8 2 4 6 
-Solution #28:
+Solution #14:
 3 5 2 8 1 7 4 6 
-Solution #30:
+Solution #15:
 3 5 2 8 6 4 7 1 
-Solution #32:
+Solution #16:
 3 5 7 1 4 2 8 6 
-Solution #34:
+Solution #17:
 3 5 8 4 1 7 2 6 
-Solution #36:
+Solution #18:
 3 6 2 5 8 1 7 4 
-Solution #38:
+Solution #19:
 3 6 2 7 1 4 8 5 
-Solution #40:
+Solution #20:
 3 6 2 7 5 1 8 4 
-Solution #42:
+Solution #21:
 3 6 4 1 8 5 7 2 
-Solution #44:
+Solution #22:
 3 6 4 2 8 5 7 1 
-Solution #46:
+Solution #23:
 3 6 8 1 4 7 5 2 
-Solution #48:
+Solution #24:
 3 6 8 1 5 7 2 4 
-Solution #50:
+Solution #25:
 3 6 8 2 4 1 7 5 
-Solution #52:
+Solution #26:
 3 7 2 8 5 1 4 6 
-Solution #54:
+Solution #27:
 3 7 2 8 6 4 1 5 
-Solution #56:
+Solution #28:
 3 8 4 7 1 6 2 5 
-Solution #58:
+Solution #29:
 4 1 5 8 2 7 3 6 
-Solution #60:
+Solution #30:
 4 1 5 8 6 3 7 2 
-Solution #62:
+Solution #31:
 4 2 5 8 6 1 3 7 
-Solution #64:
+Solution #32:
 4 2 7 3 6 8 1 5 
-Solution #66:
+Solution #33:
 4 2 7 3 6 8 5 1 
-Solution #68:
+Solution #34:
 4 2 7 5 1 8 6 3 
-Solution #70:
+Solution #35:
 4 2 8 5 7 1 3 6 
-Solution #72:
+Solution #36:
 4 2 8 6 1 3 5 7 
-Solution #74:
+Solution #37:
 4 6 1 5 2 8 3 7 
-Solution #76:
+Solution #38:
 4 6 8 2 7 1 3 5 
-Solution #78:
+Solution #39:
 4 6 8 3 1 7 5 2 
-Solution #80:
+Solution #40:
 4 7 1 8 5 2 6 3 
-Solution #82:
+Solution #41:
 4 7 3 8 2 5 1 6 
-Solution #84:
+Solution #42:
 4 7 5 2 6 1 3 8 
-Solution #86:
+Solution #43:
 4 7 5 3 1 6 8 2 
-Solution #88:
+Solution #44:
 4 8 1 3 6 2 7 5 
-Solution #90:
+Solution #45:
 4 8 1 5 7 2 6 3 
-Solution #92:
+Solution #46:
 4 8 5 3 1 7 2 6 
-Solution #94:
+Solution #47:
 5 1 4 6 8 2 7 3 
-Solution #96:
+Solution #48:
 5 1 8 4 2 7 3 6 
-Solution #98:
+Solution #49:
 5 1 8 6 3 7 2 4 
-Solution #100:
+Solution #50:
 5 2 4 6 8 3 1 7 
-Solution #102:
+Solution #51:
 5 2 4 7 3 8 6 1 
-Solution #104:
+Solution #52:
 5 2 6 1 7 4 8 3 
-Solution #106:
+Solution #53:
 5 2 8 1 4 7 3 6 
-Solution #108:
+Solution #54:
 5 3 1 6 8 2 4 7 
-Solution #110:
+Solution #55:
 5 3 1 7 2 8 6 4 
-Solution #112:
+Solution #56:
 5 3 8 4 7 1 6 2 
-Solution #114:
+Solution #57:
 5 7 1 3 8 6 4 2 
-Solution #116:
+Solution #58:
 5 7 1 4 2 8 6 3 
-Solution #118:
+Solution #59:
 5 7 2 4 8 1 3 6 
-Solution #120:
+Solution #60:
 5 7 2 6 3 1 4 8 
-Solution #122:
+Solution #61:
 5 7 2 6 3 1 8 4 
-Solution #124:
+Solution #62:
 5 7 4 1 3 8 6 2 
-Solution #126:
+Solution #63:
 5 8 4 1 3 6 2 7 
-Solution #128:
+Solution #64:
 5 8 4 1 7 2 6 3 
-Solution #130:
+Solution #65:
 6 1 5 2 8 3 7 4 
-Solution #132:
+Solution #66:
 6 2 7 1 3 5 8 4 
-Solution #134:
+Solution #67:
 6 2 7 1 4 8 5 3 
-Solution #136:
+Solution #68:
 6 3 1 7 5 8 2 4 
-Solution #138:
+Solution #69:
 6 3 1 8 4 2 7 5 
-Solution #140:
+Solution #70:
 6 3 1 8 5 2 4 7 
-Solution #142:
+Solution #71:
 6 3 5 7 1 4 2 8 
-Solution #144:
+Solution #72:
 6 3 5 8 1 4 2 7 
-Solution #146:
+Solution #73:
 6 3 7 2 4 8 1 5 
-Solution #148:
+Solution #74:
 6 3 7 2 8 5 1 4 
-Solution #150:
+Solution #75:
 6 3 7 4 1 8 2 5 
-Solution #152:
+Solution #76:
 6 4 1 5 8 2 7 3 
-Solution #154:
+Solution #77:
 6 4 2 8 5 7 1 3 
-Solution #156:
+Solution #78:
 6 4 7 1 3 5 2 8 
-Solution #158:
+Solution #79:
 6 4 7 1 8 2 5 3 
-Solution #160:
+Solution #80:
 6 8 2 4 1 7 5 3 
-Solution #162:
+Solution #81:
 7 1 3 8 6 4 2 5 
-Solution #164:
+Solution #82:
 7 2 4 1 8 5 3 6 
-Solution #166:
+Solution #83:
 7 2 6 3 1 4 8 5 
-Solution #168:
+Solution #84:
 7 3 1 6 8 5 2 4 
-Solution #170:
+Solution #85:
 7 3 8 2 5 1 6 4 
-Solution #172:
+Solution #86:
 7 4 2 5 8 1 3 6 
-Solution #174:
+Solution #87:
 7 4 2 8 6 1 3 5 
-Solution #176:
+Solution #88:
 7 5 3 1 6 8 2 4 
-Solution #178:
+Solution #89:
 8 2 4 1 7 5 3 6 
-Solution #180:
+Solution #90:
 8 2 5 3 1 7 4 6 
-Solution #182:
+Solution #91:
 8 3 1 6 2 5 7 4 
-Solution #184:
+Solution #92:
 8 4 1 3 6 2 7 5 

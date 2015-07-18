@@ -1,0 +1,20 @@
+#!/bin/bash
+
+test_sh()
+{
+    echo "run $*"
+    RES=`eval $*`
+    local rc=$?
+    
+    echo "run result: $rc"
+    echo "$RES"
+    return $rc
+}
+
+test_ssh()
+{
+    CMD="ssh -t localhost $*"
+    test_sh $CMD
+}
+
+echo "source func-base..."

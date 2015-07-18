@@ -1,0 +1,103 @@
+--- Results for user flueg_u1:
+Name: flueg_u1
+Last update: Thu Mar  6 13:57:56 2014
+Next update: Thu Mar  6 15:37:56 2014
+Deny RSoP: No
+Loopback Mode: Not Configure
+
+Result Set of Policy
+------------------------------------------------
+software/policies/centrify/gnome
+    N/A
+
+software/policies/centrify/unixsettings/crontabentries
+    test_gp1:Command1 - 10 * * * * f_u1 ls
+
+software/policies/centrify/unixsettings/runcommand
+    test_gp1:Command1 - ls
+
+--- Results for computer:
+Name: frhel3u8-lueg$
+Last update: Thu Mar  6 13:05:00 2014
+Next update: Thu Mar  6 15:01:00 2014
+Deny RSoP: No
+Loopback Mode: Not Configure
+
+Result Set of Policy
+------------------------------------------------
+secedit/kerberos policy
+    Default Domain Policy:MaxClockSkew - 5
+    Default Domain Policy:MaxRenewAge - 7
+    Default Domain Policy:MaxServiceAge - 600
+    Default Domain Policy:MaxTicketAge - 10
+    Default Domain Policy:TicketValidateClient - 1
+
+secedit/system access
+    Default Domain Policy:ClearTextPassword - 0
+    Default Domain Policy:ForceLogoffWhenHourExpire - 0
+    Default Domain Policy:LSAAnonymousNameLookup - 0
+    Default Domain Policy:LockoutBadCount - 0
+    Default Domain Policy:MaximumPasswordAge - -1
+    Default Domain Policy:MinimumPasswordAge - 0
+    Default Domain Policy:MinimumPasswordLength - 0
+    Default Domain Policy:PasswordComplexity - 0
+    Default Domain Policy:PasswordHistorySize - 24
+    Default Domain Policy:RequireLogonToChangePassword - 0
+
+secedit/unicode
+    Default Domain Policy:Unicode - yes
+
+secedit/version
+    Default Domain Policy:Revision - 1
+    Default Domain Policy:signature - "$CHICAGO$"
+
+software/policies/centrify/centrifydc/settings/adclient
+    Default Domain Policy:auto.schema.shell - /bin/Temp/bash
+
+software/policies/centrify/centrifydc/settings/dzdo
+    test_gp1:adclient.dzdo.clear.passwd.timestamp - Enabled
+
+software/policies/centrify/centrifydc/settings/gp
+    test_gp1:gp.disable.user - Disabled
+
+software/policies/centrify/centrifydc/settings/sudo
+    Default Domain Policy:adclient.sudo.clear.passwd.timestamp - Disabled
+
+software/policies/centrify/directaudit/agent
+    N/A
+
+software/policies/centrify/directaudit/common
+    N/A
+
+software/policies/centrify/unixsettings
+    test_gp1:filecopyv2.enabled - 0000000001
+    Default Domain Policy:sudo.enabled - 0000000001
+
+software/policies/centrify/unixsettings/filecopyv2/tmp/gpdata/testfile
+    test_gp1:binary.copied - 0000000000
+    test_gp1:destination - /tmp/
+    test_gp1:owner.gid - 1314
+    test_gp1:owner.uid - 520
+    test_gp1:source - gpdata/testfile
+    test_gp1:source.fqdn - win2k8.flueg.est
+    test_gp1:use.existing.perms - 0000000000
+    test_gp1:use.selected.perms - 0744
+
+software/policies/centrify/unixsettings/sudo
+    Default Domain Policy:line1 - adclient.sudo.clear.passwd.timestamp ALL=false
+
+software/policies/microsoft/systemcertificates/efs
+    Default Domain Policy:EFSBlob - 010001000100000084030000800300001c0000000200000048030000380000000000000000000000010500000000000515000000db8c0b8f0a7d252e22cdeec2f4010000308203443082022ca0030201020210aa09bd5e9c50eeab4474f0374e22a9f8300d06092a864886f70d01010505003050311630140603550403130d41646d696e6973747261746f72310c300a0603550407130345465331283026060355040b131f4546532046696c6520456e6372797074696f6e204365727469666963617465301e170d3132313231323031313935315a170d3135313231323031313935315a3050311630140603550403130d41646d696e6973747261746f72310c300a0603550407130345465331283026060355040b131f4546532046696c6520456e6372797074696f6e20436572746966696361746530820122300d06092a864886f70d01010105000382010f003082010a0282010100bc52031c613f5acb657e9af819ff6f2599a732131ade6e624da527eaf29cc5ed01c21c097b84165b20d63d43b19ca5af2a777839f1f614cf3651281c34ead2b4bccab6f3e12306c6d93b1e7129b1cc2e2ce450aa4dca794ff1de2567fa2fd5a6c3d586ef70fb968b7b550692bb24f6c5b3c0dcbd35a618e65ca4ab0ee11eb42cb448c8c93ef9022e2eeeb7eb5be257cdeef14660488066ac1ce2a47a9a0002b30ed3f4fb7c48a3e2129a7451ac31a842c1c45b6659a238393d07942075e84d057d13b2a6fdef2c54ee23847027cceef6094ee02a25471ba79d6344368c06da960ce9ead53347acfc3ec7106cc7a3b8d95a26223b0cbb73d1c3fba2bc2be138030203010001a31a301830160603551d25040f300d060b2b0601040182370a030401300d06092a864886f70d010105050003820101000294a553c6ef066b5cde9f5671f45ac02f79eda0f65ce577e009fc46c9f3237846a90a430eecebe1670f1253d6c6af8fd6e061acd14d7a409f821745ba840eb1f95ccd7242d4f9e8e5f8d2e116202842b5c4410c86f029ecc71224a62fec82e1de6a92e0da5f7a27ba9b64b738f586ec3f6b3fc65d266c7e3ec7f85c5bbff9f5e7546299010fc9e55e247f2ac14c7307a6b1e2188610a3a9c1c2b0b844df6c7e7c99ae2be024bbe0997c3b664289fdddeef9a15e5ce56604b4542fc2fb2365a5f8deedb343e4858e9489115f86c2e4ffa67acdd5c6845eefa5cbc8b8a20e0306935fe746652f084e18166da697dab1893d4ba94207188c596ac871881f47d673
+
+software/policies/microsoft/systemcertificates/efs/certificates/9b8725b946b23c343b76c910911b336cee7deb38
+    Default Domain Policy:Blob - 0300000001000000140000009b8725b946b23c343b76c910911b336cee7deb380200000001000000cc0000001c0000006c0000000100000000000000000000000000000001000000610030006600650032003700350039002d0037006400380038002d0034006300390064002d0039003000360036002d0063006100340062006400630035003300330062006300640000000000000000004d006900630072006f0073006f0066007400200045006e00680061006e006300650064002000430072007900700074006f0067007200610070006800690063002000500072006f00760069006400650072002000760031002e00300000000000200000000100000048030000308203443082022ca0030201020210aa09bd5e9c50eeab4474f0374e22a9f8300d06092a864886f70d01010505003050311630140603550403130d41646d696e6973747261746f72310c300a0603550407130345465331283026060355040b131f4546532046696c6520456e6372797074696f6e204365727469666963617465301e170d3132313231323031313935315a170d3135313231323031313935315a3050311630140603550403130d41646d696e6973747261746f72310c300a0603550407130345465331283026060355040b131f4546532046696c6520456e6372797074696f6e20436572746966696361746530820122300d06092a864886f70d01010105000382010f003082010a0282010100bc52031c613f5acb657e9af819ff6f2599a732131ade6e624da527eaf29cc5ed01c21c097b84165b20d63d43b19ca5af2a777839f1f614cf3651281c34ead2b4bccab6f3e12306c6d93b1e7129b1cc2e2ce450aa4dca794ff1de2567fa2fd5a6c3d586ef70fb968b7b550692bb24f6c5b3c0dcbd35a618e65ca4ab0ee11eb42cb448c8c93ef9022e2eeeb7eb5be257cdeef14660488066ac1ce2a47a9a0002b30ed3f4fb7c48a3e2129a7451ac31a842c1c45b6659a238393d07942075e84d057d13b2a6fdef2c54ee23847027cceef6094ee02a25471ba79d6344368c06da960ce9ead53347acfc3ec7106cc7a3b8d95a26223b0cbb73d1c3fba2bc2be138030203010001a31a301830160603551d25040f300d060b2b0601040182370a030401300d06092a864886f70d010105050003820101000294a553c6ef066b5cde9f5671f45ac02f79eda0f65ce577e009fc46c9f3237846a90a430eecebe1670f1253d6c6af8fd6e061acd14d7a409f821745ba840eb1f95ccd7242d4f9e8e5f8d2e116202842b5c4410c86f029ecc71224a62fec82e1de6a92e0da5f7a27ba9b64b738f586ec3f6b3fc65d266c7e3ec7f85c5bbff9f5e7546299010fc9e55e247f2ac14c7307a6b1e2188610a3a9c1c2b0b844df6c7e7c99ae2be024bbe0997c3b664289fdddeef9a15e5ce56604b4542fc2fb2365a5f8deedb343e4858e9489115f86c2e4ffa67acdd5c6845eefa5cbc8b8a20e0306935fe746652f084e18166da697dab1893d4ba94207188c596ac871881f47d673
+
+software/policies/microsoft/systemcertificates/efs/crls
+    N/A
+
+software/policies/microsoft/systemcertificates/efs/ctls
+    N/A
+
+system/currentcontrolset/control/lsa
+    Default Domain Policy:NoLMHash - 0000000001
+

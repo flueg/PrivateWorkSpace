@@ -1,0 +1,5 @@
+GP Smoketest
+Do not edit
+1:aaa \
+3:aaa ccc ddd \
+Connection to frhel65-lueg closed.
