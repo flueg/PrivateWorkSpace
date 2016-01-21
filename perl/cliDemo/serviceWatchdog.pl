@@ -1,4 +1,18 @@
 #!/usr/bin/perl
+################################################################################
+# Copyrights (C) 2016 Kankan.com
+#
+# Monitor kankan running account platform related services. 
+# Please specify services in configuration file conf/host.configre.
+#
+# Package required:
+# Log::Log4perl
+# Email::Simple
+# Email::Sender::Simple
+# Email::Sender::Transport::SMTP::TLS
+#
+# Initial version by liuhongguang@kankan.com
+################################################################################
 
 use strict;
 use warnings;
@@ -18,8 +32,9 @@ use constant OPEN_FILE_FAILUE	=> 2;
 # Logger layout pattern
 use constant LOG_LAYOUT_PATTERN => "%d %r %p %M-%L %m%n";
 
-# Email rechieve recipients and cc list
+# Use this tag to category emails in Mailbox.
 use constant MAIL_TAG => "#ServiceFailureOnServer#";
+# Email rechieve recipients and cc list
 my $MAIL_RECIPIENTS = 'liuhongguang@kankan.com,';
 my $CC_LIST = 'liuhongguang@kankan.com,';
 
@@ -99,6 +114,7 @@ sub LoadConfiguration
 		return OPEN_FILE_FAILUE;
 	}
 
+	# the key "kankan" makes no meaning.
 	my $key = "kankan";
 	while (<$fd>)
 	{
@@ -119,6 +135,7 @@ sub LoadConfiguration
 	}
 	close $fd;
 
+	# Append recipients and cc from configuration.
 	if (defined $host->{'recipients'})
 	{
 		$MAIL_RECIPIENTS .= join ',', @{$host->{'recipients'}};
@@ -130,26 +147,26 @@ sub LoadConfiguration
 	
 
 # Please define $debugConf if need to check the parsing configuration.
-if ($debugConf)
-{
-	for (keys $host)
-	{
-		print "$_: ";
-		print @{$host->{$_}};
-		print "\n";
-	}
-}
+#if ($debugConf)
+#{
+#	for (keys $host)
+#	{
+#		print "$_: ";
+#		print @{$host->{$_}};
+#		print "\n";
+#	}
+#}
 
 }
 
 # two parameters:
 #  cmd     - a command or reference to an array of command + arguments
 #  timeout - number of seconds to wait (0 = forever)
-
+#
 # returns:
 #  cmd exit status (-1 if timed out)
 #  cmd results (STDERR and STDOUT merged into an array ref)
-
+#
 sub RunCmd
 {
   my $cmd = shift || return(0, []);
@@ -204,12 +221,22 @@ sub RunCmd
 }
 
 
+#
+# Check if specified services are running or not.
+#
+# $_[0]:  array   -  service name to be check in array.
+#
+# return: $result - an array reference with stopped services.
+#
 sub CheckServiceStatus($)
 {
 	my $services = $_[0];
 	my @result;
 	for my $service (@$services)
 	{
+		# The better command to check a service status should be: service <svc name> status.
+		# However since we don't have upstart/systemd scripts deployed for our binaries,
+		# use the "pidof" to check service running status here.
 		my $cmd = "pidof $service";
 		my ($rc, $output) = RunCmd($cmd);
 		DEBUG(@$output) if (@$output);
@@ -222,9 +249,13 @@ sub CheckServiceStatus($)
 	return \@result;
 }
 
+# Send an email with the stopped services to administrators.
+#
+# $_[0]:  $failed_services - all stopped services
+#
 sub SendEMail($)
 {
-	my $body = $_[0];
+	my $failed_services = $_[0];
 	my $uname = `whoami`;
 	chomp $uname;
 	my $host_name = `hostname`;
@@ -242,7 +273,7 @@ sub SendEMail($)
 		body 		 => <<MAIL_BODY,
 HostName: @{$host->{'hostname'}}
 Host: @{$host->{'host'}}
-Services: $body
+Services: $failed_services
 
 
 Note: If you don't want to rechieve this email again, please contact Flueg (liuhongguang\@kankan.com) to unsubscribe.
