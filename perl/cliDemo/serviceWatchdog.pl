@@ -12,6 +12,9 @@
 # Email::Sender::Transport::SMTP::TLS
 #
 # Initial version by liuhongguang@kankan.com
+#
+# TODO: we might need to make sure every service is starting up with right port.
+# 	e.g. mysqld:3306
 ################################################################################
 
 use strict;
@@ -23,6 +26,7 @@ use Email::Simple;
 use Email::Sender::Simple qw(sendmail);
 use Email::Sender::Transport::SMTP::TLS;
 use Try::Tiny;
+use File::Basename;
 
 # Return types
 use constant EXIT_SUCCESS 	=> 0;
@@ -34,6 +38,15 @@ use constant LOG_LAYOUT_PATTERN => "%d %r %p %M-%L %m%n";
 
 # Use this tag to category emails in Mailbox.
 use constant MAIL_TAG => "#ServiceFailureOnServer#";
+use constant BINARY_PATH => qw(
+	/bin
+	/sbin
+	/usr/bin
+	/usr/sbin
+	/usr/local/bin
+	/usr/local/sbin
+);
+
 # Email rechieve recipients and cc list
 my $MAIL_RECIPIENTS = 'liuhongguang@kankan.com,';
 my $CC_LIST = 'liuhongguang@kankan.com,';
@@ -68,6 +81,17 @@ EOF_USAGE
 	exit $ret ;
 }
 
+sub GetCommmandPath($)
+{
+	my $cmd = shift;
+	for my $path (BINARY_PATH)
+	{
+		return "$path/$cmd" if (-x "$path/$cmd");
+	}
+	ERROR("Failed to find expected command: [$cmd]");
+	return undef;
+}
+
 #
 # Initialize the command options and logger settings.
 #
@@ -75,6 +99,7 @@ sub Init()
 {
 	# Parse the options
 	GetOptions("logger=s"	=> \$gLogger,
+		   "conf=s"	=> \$gConf,
 		   "verbose"	=> \$gVerbose,
 		   "help"	=> \$help
 		  ) or Usage(USAGE_ERROR);
@@ -131,6 +156,7 @@ sub LoadConfiguration
 		else
 		{
 			push @{$host->{$key}}, $_;
+			DEBUG("Loading entry [$_]");
 		}
 	}
 	close $fd;
@@ -220,31 +246,148 @@ sub RunCmd
   exit 1;
 }
 
+#
+# Check if specified service is running and listenning to corresponding tcp
+# ports.
+#
+#   $_[0]: $name - service name
+#   $_[1]: \%port - tcp ports as hash key
+#
+#   return: (1, []) - all prots are listened by service.
+#   	  (0, \@ports) - specified ports is not listened by service.
+#
+sub CheckServiceStatusWithTcpPorts
+{
+	my $name = $_[0];
+	my $ports = $_[1];
+
+	# 'netstat' is obsoleted, use 'ss' instead.
+	my $cmd = GetCommmandPath("ss");
+	my $grep = GetCommmandPath("grep");
+	$cmd  = "$cmd -ptln | $grep -w $name"; 
+	# Command result of 'ss':
+	# State      Recv-Q    Send-Q   Local Address:Port	 Peer 		Address:Port
+	# LISTEN	0      1024	*:9001			 *:*        users:(("supervisord",26229,4))
+	# Command result of 'netstat':
+	# Proto Recv-Q Send-Q Local Address               Foreign Address             State       PID/Program name
+	# tcp        0      0 10.1.1.92:3306              10.1.1.147:48422            ESTABLISHED 6426/mysqld
+	my ($rc, $output) = RunCmd($cmd); 
+	if ($rc)
+	{
+		DEBUG("No port is listened by $name."); 
+		return (0, [keys %$ports]);
+	}
+	my %tmp_ports = %$ports;
+	for my $line (@$output)
+	{
+		# fetch port from output string.
+		my $port = (split ':', (split ' ', $line)[3])[1];
+		# We don't care how much foreign host is connected to service:port.
+		# delete from hash once find that the local port is listened.
+		delete $tmp_ports{$port} if (defined $tmp_ports{$port});
+	}
+
+	if (scalar keys %tmp_ports)
+	{
+		my $debug_msg = "ports: [%s] listened by $name are NOT detected.";
+		DEBUG(sprintf($debug_msg, join(',', keys%tmp_ports)));
+		return (0, [keys %tmp_ports]);
+	}
+	else
+	{
+		DEBUG("Ports: " . join(',', keys %$ports) . " listened by $name is detected." );
+		return (1, []);
+	}	
+}
+
+#
+# Check if specified services is running or not.
+#
+#  $_[0]: $name - service name.
+#
+#  return : 1 - service is running.
+#  	    0 - service is stopped.
+#
+sub CheckServiceStatusWithoutPort
+{
+	my $name = $_[0];
+	# The better command to check a service status should be: service <svc name> status.
+	# However since we don't have upstart/systemd scripts deployed for our binaries,
+	# use the "pidof" to check service running status here.
+	my $cmd = GetCommmandPath("pidof");
+	$cmd = "$cmd $name"; 
+	my ($rc, $output) = RunCmd($cmd); 
+	DEBUG(@$output) if (@$output); 
+	if ($rc) 
+	{ 
+		DEBUG("$name is not running."); 
+		return 0;
+	} 
+	return 1;
+
+}
 
 #
 # Check if specified services are running or not.
+# Take care this scenarios:
+# 1. Service has n daemon entries running on server:
+#    e.g. mysqld:3306, mysqld:3307 and mysqld3309
+#
+# Workaround: only count the number of daemons running on server.
+#     Will not check if the port is valid.
 #
 # $_[0]:  array   -  service name to be check in array.
 #
 # return: $result - an array reference with stopped services.
 #
-sub CheckServiceStatus($)
+sub CheckServicesStatus($)
 {
+	# Raw data from configuration file.
 	my $services = $_[0];
 	my @result;
+	my %services;
+	# Raw data format: <name:port> per line.
 	for my $service (@$services)
 	{
-		# The better command to check a service status should be: service <svc name> status.
-		# However since we don't have upstart/systemd scripts deployed for our binaries,
-		# use the "pidof" to check service running status here.
-		my $cmd = "pidof $service";
-		my ($rc, $output) = RunCmd($cmd);
-		DEBUG(@$output) if (@$output);
-		if ($rc)
+		#my ($name, $port) = ($service =~ m/([^:]*):([^:]*)/)[0, 1];
+		my ($name, $port);
+		if ($service =~ m/([^:]*):([^:]*)/)
 		{
-			DEBUG("$service is not running.");
+			$name = $1, $port = $2;
+			# Skip null name.
+			next unless($name);
+			DEBUG("Get service $name:$port");
+			# No need the full path
+			$services{basename($name)}{$port} = 1;
+		}
+		elsif ($service =~ m/([^:]*)/)
+		{
+			$name = $1;
+			# Skip null name.
+			next unless($name);
+			DEBUG("Get service $name:N/A");
+			$services{basename($name)} = 1;
+		}
+	}
+
+	for my $service (keys %services)
+	{
+		my ($rc, $output);
+		if (ref($services{$service}) eq "HASH")
+		{
+			($rc, $output) = CheckServiceStatusWithTcpPorts($service, $services{$service});
+			next if ($rc);
+			my $missed_ports = join ',', @$output;
+			push @result, "$service:$missed_ports";
+		}
+		# Note that if we define my $var = "value"; then ref(\$var) is 'SCALAR'
+		elsif (ref(\$services{$service}) eq "SCALAR")
+		{
+			$rc = CheckServiceStatusWithoutPort($service);
+			next if ($rc);
 			push @result, $service;
 		}
+	
 	}
 	return \@result;
 }
@@ -273,7 +416,8 @@ sub SendEMail($)
 		body 		 => <<MAIL_BODY,
 HostName: @{$host->{'hostname'}}
 Host: @{$host->{'host'}}
-Services: $failed_services
+Services:
+	$failed_services
 
 
 Note: If you don't want to rechieve this email again, please contact Flueg (liuhongguang\@kankan.com) to unsubscribe.
@@ -304,11 +448,12 @@ INFO("Start to check if specified services is running ...");
 
 LoadConfiguration();
 
-my $stopped_services = CheckServiceStatus(\@{$host->{service}});
+my $stopped_services = CheckServicesStatus(\@{$host->{service}});
 if (@$stopped_services > 0)
 {
-	my $stop_svcs = join ", ", @$stopped_services;
-	my $msg = "Services [$stop_svcs] are not running.";
+	my $stop_svcs = join "\n\t", @$stopped_services;
+	my $stop_svcs_msg = join ", ", @$stopped_services;
+	my $msg = "Services [$stop_svcs_msg] are not running.";
 	ERROR($msg);
 	SendEMail($stop_svcs);
 }
