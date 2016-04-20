@@ -1,6 +1,6 @@
 #!/bin/bash
-
-prefix=data/intruder
+base_dir=$(dirname $0)
+prefix=$base_dir/data/intruder
 
 daynum=${1:-0}
 minlimit=${2:-500}
