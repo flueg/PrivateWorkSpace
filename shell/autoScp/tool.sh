@@ -13,6 +13,10 @@ kkscp()
 		echo "$send_file is not found"
 		return 2
 	fi
+	if [ ! -x /usr/bin/expect ];then
+		echo "binary /usr/bin/expect is not installed."
+		return 3
+	fi
 
 	SSH=scp.expect
 	cat <<-EXPECT_SCRIPTS > $SSH
