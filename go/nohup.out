@@ -1,0 +1,3 @@
+2016/05/09 15:31:42 open /home/flueg/go/src/md5: no such file or directory
+2016/05/09 16:09:35 lstat /home/flueg/go/crypto/md5: no such file or directory
+2016/05/09 16:09:39 lstat /home/flueg/go/crypto: no such file or directory
