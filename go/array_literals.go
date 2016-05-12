@@ -2,6 +2,7 @@ package main
 import "fmt"
 func main() {
     var arrAge = [5]int{18, 20, 15, 22, 16}
+    // technically speaking it then becomes a slice
     var arrLazy = [...]int{5, 6, 7, 8, 22}
     //var arrLazy = []int{5, 6, 7, 8, 22}
     //var arrKeyValue = [5]string{3: "Chris", 4: "Ron"}
