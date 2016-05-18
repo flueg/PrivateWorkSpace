@@ -7,15 +7,12 @@ function iterator(self)
 			val[#val+1] = v 
 		end 
 	end 
-	return function (index)
+	return function(index)
+		if index == nil then index = 1000000007 end
 			index = index % #val + 1 
 			return val[index]
 		end, 
-		function () 
-			i = i % #val
-			i = i + 1
-			return val[i]
-		end
+		function() i = i % #val + 1; return val[i] end
 end 
 
 return {

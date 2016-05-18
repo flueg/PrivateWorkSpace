@@ -1,11 +1,17 @@
 #include <iostream>
 #include <vector>
 #include <iterator>
+#include <string>
+
+#define MAX(x, y) ((x) > (y) ? (x) : (y))
+using namespace std;
 
 typedef std::vector<int> VInt;
 typedef VInt::iterator VIterator;
 
-using namespace std;
+typedef std::vector<string> VString;
+typedef VString::iterator VSIterator;
+
 
 // This method will not delete all duplicated elements in vector.
 void UniqueVector(VInt &v)
@@ -22,7 +28,7 @@ void UniqueVector(VInt &v)
 	}
 }
 
-int main()
+void vectorInt()
 {
 	VInt v = {1, 2, 2, 2, 2, 3, 3, 3, 3, 3, 4, 5, 6};
 	//VInt v;
@@ -56,6 +62,25 @@ int main()
 		cout << *i << " ";
 	}
 	cout <<endl;
+}
 
+void vectorString()
+{
+	VString vstr = {"21:1005964138,1005964139,1005964140", "222:1005964138"};
+	for (VSIterator it = vstr.begin(); it != vstr.end(); ++it)
+	{
+		string ss = *it;
+		size_t pos = (*it).find(":");
+		int op = atoi((*it).substr(0, pos).c_str());
+		string rr = (*it).substr(pos+1);
+		cout << op << " " << rr << endl;
+		//cout << *it << endl;
+	}
+}
+int main()
+{
+	//vectorInt();
+	vectorString();
+	cout << MAX(2,1) << "" << MAX(3,4) << endl;
 	return 0;
 }
