@@ -7,11 +7,11 @@ int main()
 {
 	map<string, int> mTest;
 	map<string, int>::iterator it;
-	mTest["a"] = 1;
-	mTest["b"] = 2;
-	mTest["c"] = 3;
-	mTest["d"] = 4;
 	mTest["e"] = 5;
+	mTest["a"] = 1;
+	mTest["d"] = 4;
+	mTest["c"] = 3;
+	mTest["b"] = 2;
 
 	cout << "Before erasing ..." << endl;
 	for(it = mTest.begin(); it != mTest.end(); ++it)

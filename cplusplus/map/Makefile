@@ -1,6 +1,6 @@
 CC=g++
 CCLDD_FLAGS = -lstdc++
-CCFLAGS = -std=c++11
+##CCFLAGS = -std=c++11
 
 a: test.o
 	$(CC) $(CCLDD_FLAGS) test.o -o a

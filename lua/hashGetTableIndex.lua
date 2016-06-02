@@ -30,10 +30,10 @@ end
 ]]
 
 local i = 0
-while i < 3 do
+while i < 10 do
 	i = i + 1
-	if t.host ~= 1 then
-		t = iter(userno + i)
-		print(t.flueg, t.host)
-	end
+	--if t.host ~= 1 then
+		t = nxt()
+		print(i, t.flueg, t.host)
+	--end
 end
