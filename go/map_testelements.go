@@ -15,9 +15,11 @@ func main() {
 	} else {
 		fmt.Println("map1 does not contain Bejing")
 	}
+
 	value, isPresent = map1["Paris"]
 	fmt.Printf("Is \"Paris\" in map1 ?: %t\n", isPresent)
 	fmt.Printf("Value is: %d\n", value)
+
 	// delete an item:
 	delete(map1, "Washington")
 	value, isPresent = map1["Washington"]
