@@ -1,0 +1,3 @@
+This file explains what are the example go src files do.
+
+string_2D.go:			Declare a 2 dimension string array with const size.
