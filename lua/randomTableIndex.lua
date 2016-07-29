@@ -1,11 +1,13 @@
 local iterator=require "iterator"
 
+local endP = {flueg="single", host="dog"}
 local config = {
+	gateway1 = {endP},
 	gateway = {
-		[1] = {flueg="liu", host=4},
-		[2] = {flueg="lai", host=3},
-		[3] = {flueg="flueg", host=2},
-		[4] = {flueg="alice", host=1},
+		{flueg="liu", host=4},
+		{flueg="lai", host=3},
+		{flueg="flueg", host=2},
+		{flueg="alice", host=1},
 		--[1] = "flueg=liu",
 		--[2] = "flueg=lai",
 		--[3] = "flueg=flueg",
@@ -14,7 +16,8 @@ local config = {
 }
 
 -- iterator will return a function.
-local nxt  = iterator.randomiter(config.gateway);
+--local nxt  = iterator.randomiter(config.gateway);
+local nxt  = iterator.randomiter(config.gateway1);
 
 local n = tonumber(arg[1])
 if n == nil then n = 10 end
