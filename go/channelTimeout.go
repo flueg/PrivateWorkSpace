@@ -8,8 +8,11 @@ func main() {
 	timeout := make(chan bool, 1)
 	ch := make(chan int, 1)
 	go func() {
+		ch <- 11
+		close(ch)
 		time.Sleep(1e9) // 等待1秒钟
 		timeout <- true
+		close(timeout)
 	}()
 	// 然后我们把timeout这个channel利用起来
 	select {
