@@ -24,9 +24,9 @@ func MysqlEscape(source string) (string, error) {
 		case '"':
 			flag = true
 			escape = '"'
-		case 32:
-			flag = true
-			escape = 'Z'
+		//case 32:
+		//	flag = true
+		//	escape = 'Z'
 		default:
 		}
 		if flag {
@@ -54,8 +54,8 @@ func MysqlUnEscape(source string) (string, error) {
 		if tempStr[i] == '\\' {
 			flag = true
 			switch tempStr[i+1] {
-			case 'Z':
-				escape = 32
+			//case 'Z':
+			//	escape = 32
 			default:
 				escape = tempStr[i+1]
 			}
