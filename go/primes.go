@@ -19,9 +19,16 @@ func primetask(c chan int) {
 	go primetask(nc)
 	for {
 		i := <-c
-		if i%p != 0 {
+		if p*p > i {
+			//fmt.Printf("root %d less than %d\n", i, p)
 			nc <- i
+			continue
 		}
+		if i%p == 0 {
+			//fmt.Printf("%d devied by %d\n", i, p)
+			continue
+		}
+		nc <- i
 	}
 }
 
@@ -40,7 +47,10 @@ func main() {
 	fmt.Println("goal=", goal)
 	c := make(chan int)
 	go primetask(c)
-	for i := 2; ; i++ {
+	if goal >= 2 {
+		fmt.Println(2)
+	}
+	for i := 3; ; i += 2 {
 		c <- i
 	}
 }
